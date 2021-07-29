@@ -21,8 +21,8 @@
             :exec-args {:jar "consistency.jar"
                         :aot true
                         :debug-clash true}}
-  #_#_:clojars-deploy {:extra-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}
+  :clojars-deploy {:extra-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}
                    :exec-fn deps-deploy.deps-deploy/deploy
-                   :exec-args {:installer #_:remote :local
+                   :exec-args {:installer :remote
                                :sign-releases? true
-                               #_#_:artifact "logs-helpers.jar"}}}}
+                               :artifact "consistency.jar"}}}}
