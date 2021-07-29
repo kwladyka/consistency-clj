@@ -1,0 +1,35 @@
+name: master tests
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Install java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Install clojure
+        uses: DeLaGuardo/setup-clojure@3.4
+        with:
+          cli: '1.10.3.855'
+
+      - name: Tests
+        run: clj -X:run-tests
+
+      - name: Slack notifications
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: GitHub Actions
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
