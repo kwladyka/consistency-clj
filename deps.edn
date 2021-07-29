@@ -18,7 +18,8 @@
                                  :main-opts ["-m" "clj-check.check"]}
   :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.1.250"}}
             :exec-fn hf.depstar/uberjar
-            :exec-args {:aot true
+            :exec-args {:jar "consistency.jar"
+                        :aot true
                         :debug-clash true}}
   #_#_:clojars-deploy {:extra-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}
                    :exec-fn deps-deploy.deps-deploy/deploy
