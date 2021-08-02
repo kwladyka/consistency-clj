@@ -18,7 +18,7 @@ Code which help me keep consistency in my projects. Feel free to use it.
 ## Specification
 
 - [logs/ring_wrappers](src/consistency/logs/ring_wrappers.clj) - wrapper for [ring](https://github.com/ring-clojure/ring)
-- [logs/google_json_payload](src/consistency/logs/json_payload) - JSON structured logs output in google format. Especially useful for services like [cloud run](https://cloud.google.com/run), because google read JSON format from `stdout` and `stderr`. In that way you don't need any extra libraries for logging.
+- [logs/google/json_payload.clj](src/consistency/logs/google/json_payload.clj) - JSON structured logs output in google format. Especially useful for services like [cloud run](https://cloud.google.com/run), because google read JSON format from `stdout` and `stderr`. In that way you don't need any extra libraries for logging.
     - google doc [JSON payload](https://cloud.google.com/logging/docs/agent/logging/configuration#process-payload)
     - It works in [cloud run](https://cloud.google.com/run) with google [Error Reporting](https://cloud.google.com/error-reporting/docs/) without any additional settings.
 

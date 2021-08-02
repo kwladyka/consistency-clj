@@ -1,7 +1,7 @@
 (ns consistency.logs.google.integrant-test
   (:require [clojure.test :refer :all]
             [integrant.core :as ig]
-            [consistency.logs.google.integrant :as google-integrant]
+            [consistency.logs.google.json-payload-integrant :as google-integrant]
             [clojure.tools.logging :as l])
   (:import (java.util.logging Level LogManager)))
 

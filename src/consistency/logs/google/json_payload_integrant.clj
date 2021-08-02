@@ -1,4 +1,4 @@
-(ns consistency.logs.google.integrant
+(ns consistency.logs.google.json-payload-integrant
   (:require [integrant.core :as ig]
             [clojure.spec.alpha :as s]
             [consistency.logs.google.json-payload :as google-json-payload])
