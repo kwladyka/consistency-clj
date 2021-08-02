@@ -1,9 +1,9 @@
 ![](https://github.com/kwladyka/consistency-clj/workflows/master%20tests/badge.svg)
 ![](https://github.com/kwladyka/consistency-clj/workflows/clojars/badge.svg)
 
-# Logs consistency
+# Consistency
 
-Consistency code which I use in my projects. Feel free to use it.
+Code which help me keep consistency in my projects. Feel free to use it.
 
 ## Rationale
 
@@ -13,7 +13,7 @@ Consistency code which I use in my projects. Feel free to use it.
 
 ## Add dependency
 
-[![Clojars Project](https://img.shields.io/clojars/v/kwladyka/consistency-clj.svg)](https://clojars.org/kwladyka/consistency-clj)
+[![Clojars Project](https://img.shields.io/clojars/v/net.clojars.kwladyka/consistency.svg)](https://clojars.org/net.clojars.kwladyka/consistency)
 
 ## Specification
 
