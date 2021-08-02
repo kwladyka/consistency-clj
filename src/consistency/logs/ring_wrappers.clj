@@ -6,7 +6,6 @@
     (if (and body
              (#{"application/json"} (get-in request [:headers "content-type"])))
       (do (l/debug {:request (pr-str (update request :body slurp))})
-          (println (type body))
           (.reset ^java.io.ByteArrayInputStream body))
       (l/debug {:request (pr-str request)}))
     (handler request)))
