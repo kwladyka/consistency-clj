@@ -29,27 +29,19 @@ jobs:
       - name: Tests
         run: clojure -X:run-tests
 
-      - name: Overwrite pom.xml
-        run: |
-          sed -i 's;<version/>;<version>${{ env.VERSION }}</version>;' pom.xml
-          sed -i 's;<tag/>;<tag>${{ github.sha }}</tag>;' pom.xml
-        env:
-          VERSION: ${{ steps.version.outputs.git_tag }}
+      - name: github actions test
+        run: echo clojure -T:build uber '{:version "${{ env.VERSION }}"}'
 
-      - name: Update pom.xml
-        run: clojure -Spom
+#      - name: Build jar
+#        run : clojure -T:build uber '{:version "${{ env.VERSION }}"}'
+#        env:
+#          VERSION: ${{ steps.version.outputs.git_tag }}
 
-      - name: Debug pom.xml
-        run: cat pom.xml
-
-      - name: Build jar
-        run : clojure -X:uberjar
-
-      - name: Deploy to Clojars
-        env:
-          CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
-          CLOJARS_PASSWORD: ${{ secrets.CLOJARS_TOKEN }}
-        run: clojure -X:clojars-deploy
+#      - name: Deploy to Clojars
+#        env:
+#          CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
+#          CLOJARS_PASSWORD: ${{ secrets.CLOJARS_TOKEN }}
+#        run: clojure -X:clojars-deploy
 
       - name: Slack notifications
         uses: 8398a7/action-slack@v3
