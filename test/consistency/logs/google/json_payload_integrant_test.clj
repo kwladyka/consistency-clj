@@ -2,8 +2,9 @@
   (:require [clojure.test :refer :all]
             [integrant.core :as ig]
             [consistency.logs.google.json-payload-integrant :as google-integrant]
+            [consistency.logs.google.json-payload :as google-json-payload]
             [clojure.tools.logging :as l])
-  (:import (java.util.logging Level LogManager)))
+  (:import (java.util.logging ConsoleHandler Level Filter LogRecord LogManager$RootLogger)))
 
 (defonce state nil)
 
@@ -11,8 +12,17 @@
   (when state
     (alter-var-root #'state ig/halt!)))
 
-(defn restart-json-payload []
+(defn restart-json-payload
+  "level is :debug, but filter is :warn for this ns"
+  []
   (let [config {:logs/google-json-payload {:level :debug
+                                           :is-loggable? (fn [{:keys [^String logger-name ^Level level]}]
+                                                           (let [level-int (.intValue level)]
+                                                             (not
+                                                               (or (and (.startsWith logger-name "foo.bar.baz")
+                                                                        (< level-int (google-json-payload/JUL-levels->int :debug)))
+                                                                   (and (.startsWith logger-name "consistency.logs.google.json-payload-integrant-test")
+                                                                        (< level-int (google-json-payload/JUL-levels->int :warn)))))))
                                            :pretty? true}}]
     (stop-json-payload)
     (alter-var-root #'state
@@ -24,6 +34,16 @@
 (comment
   (restart-json-payload)
   (stop-json-payload)
+
+  (let [logger-filter (proxy [Filter] []
+                        (^Boolean isLoggable [^LogRecord record]
+                          (let [level (.getLevel record)
+                                logger-name (.getLoggerName record)]
+                            (println "level" level "logger-name" logger-name)
+                            ;(spit "foo.edn" {:level level :logger-name logger-name})
+                            true)))]
+    (.setFilter ^ConsoleHandler google-json-payload/console-handler-pretty ^Filter logger-filter)
+    (l/info "foo"))
 
   (doseq [loggers (enumeration-seq (.getLoggerNames (java.util.logging.LogManager/getLogManager)))
           :let [logger (.getLogger (java.util.logging.LogManager/getLogManager) loggers)

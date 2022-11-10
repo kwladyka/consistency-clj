@@ -1,27 +1,27 @@
 {:paths ["src" "resources"]
- :deps {org.clojure/clojure {:mvn/version "1.10.3"}
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
         integrant/integrant {:mvn/version "0.8.0"}
-        org.clojure/tools.logging {:mvn/version "1.1.0"}
-        metosin/jsonista {:mvn/version "0.2.7"}}
+        org.clojure/tools.logging {:mvn/version "1.2.4"}
+        metosin/jsonista {:mvn/version "0.3.6"}}
  :aliases
  {:dev {:extra-paths ["dev"]
         :jvm-opts ["-Dclojure.tools.logging.factory=clojure.tools.logging.impl/jul-factory"]}
   :run-tests {:extra-paths ["test"]
-              :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}
-                           ring/ring-core {:mvn/version "1.9.3"}
-                           peridot/peridot {:mvn/version "0.5.3"}
+              :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
+                           ring/ring-core {:mvn/version "1.9.6"}
+                           peridot/peridot {:mvn/version "0.5.4"}
                            com.cognitect/test-runner {:git/url "https://github.com/cognitect-labs/test-runner"
-                                                      :sha "8c3f22363d63715de4087b038d79ae0de36a3263"}}
+                                                      :sha "7284cda41fb9edc0f3bc6b6185cfb7138fc8a023"}}
               :exec-fn cognitect.test-runner.api/test}
   :check-syntax-and-reflections {:extra-deps {athos/clj-check {:git/url "https://github.com/athos/clj-check.git"
-                                                               :sha "0ca84df1357d71429243b99908303f45a934654c"}}
+                                                               :sha "518d5a1cbfcd7c952f548e6dbfcb9a4a5faf9062"}}
                                  :main-opts ["-m" "clj-check.check"]}
-  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.1.250"}}
+  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.1.303"}}
             :exec-fn hf.depstar/uberjar
             :exec-args {:jar "consistency.jar"
                         :aot true
                         :debug-clash true}}
-  :clojars-deploy {:extra-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}
+  :clojars-deploy {:extra-deps {slipset/deps-deploy {:mvn/version "0.2.0"}}
                    :exec-fn deps-deploy.deps-deploy/deploy
                    :exec-args {:installer :remote
                                :sign-releases? false
