@@ -18,5 +18,5 @@
 
 (defn deploy [opts]
   (-> opts
-      (assoc :lib lib :sign-releases? true)
+      (assoc :lib lib)
       (bb/deploy)))
