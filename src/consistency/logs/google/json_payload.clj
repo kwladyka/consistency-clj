@@ -21,7 +21,7 @@
                          :finest Level/FINEST
                          :all Level/ALL}))
 
-(def JUL-levels->int (reduce-kv (fn [coll k v]
+(def JUL-levels->int (reduce-kv (fn [coll k ^Level v]
                                   (assoc coll k (.intValue v)))
                                 {} levels->JUL))
 
