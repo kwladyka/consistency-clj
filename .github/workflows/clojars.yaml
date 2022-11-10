@@ -24,7 +24,7 @@ jobs:
       - name: Install clojure
         uses: DeLaGuardo/setup-clojure@10.0
         with:
-          cli: '1.11.1'
+          cli: '1.11.1.1189'
 
       - name: Tests
         run: clojure -X:run-tests
