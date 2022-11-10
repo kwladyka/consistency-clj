@@ -29,19 +29,17 @@ jobs:
       - name: Tests
         run: clojure -X:run-tests
 
-      - name: github actions test
-        run: echo clojure -T:build uber '{:version "${{ env.VERSION }}"}'
+      - name: Build jar
+        run : clojure -T:build jar '{:version "${{ env.VERSION }}"}'
+        env:
+          VERSION: ${{ steps.version.outputs.git_tag }}
 
-#      - name: Build jar
-#        run : clojure -T:build uber '{:version "${{ env.VERSION }}"}'
-#        env:
-#          VERSION: ${{ steps.version.outputs.git_tag }}
-
-#      - name: Deploy to Clojars
-#        env:
-#          CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
-#          CLOJARS_PASSWORD: ${{ secrets.CLOJARS_TOKEN }}
-#        run: clojure -X:clojars-deploy
+      - name: Deploy to Clojars
+        run : clojure -T:build deploy '{:version "${{ env.VERSION }}"}'
+        env:
+          VERSION: ${{ steps.version.outputs.git_tag }}
+          CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
+          CLOJARS_PASSWORD: ${{ secrets.CLOJARS_TOKEN }}
 
       - name: Slack notifications
         uses: 8398a7/action-slack@v3

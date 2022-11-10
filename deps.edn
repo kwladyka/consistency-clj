@@ -16,5 +16,5 @@
   :check-syntax-and-reflections {:extra-deps {athos/clj-check {:git/url "https://github.com/athos/clj-check.git"
                                                                :sha "518d5a1cbfcd7c952f548e6dbfcb9a4a5faf9062"}}
                                  :main-opts ["-m" "clj-check.check"]}
-  :build {:deps {io.github.seancorfield/build-clj {:git/tag "v0.8.3" :git/sha "7ac1f8d" :deps/root "slim"}}
+  :build {:deps {io.github.seancorfield/build-clj {:git/tag "v0.8.3" :git/sha "7ac1f8d"}}
           :ns-default build}}}
