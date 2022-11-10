@@ -23,13 +23,14 @@
         console-handler (if pretty?
                           google-json-payload/console-handler-pretty
                           google-json-payload/console-handler)
-        logger-filter (proxy [Filter] []
-                        (^Boolean isLoggable [^LogRecord record]
-                          (is-loggable? {:logger-name (.getLoggerName record)
-                                         :level (.getLevel record)})))]
+        logger-filter (when is-loggable?
+                        (proxy [Filter] []
+                          (^Boolean isLoggable [^LogRecord record]
+                            (is-loggable? {:logger-name (.getLoggerName record)
+                                           :level (.getLevel record)}))))]
     (remove-root-logger-handlers)
     (.setLevel ^LogManager$RootLogger google-json-payload/root-logger JUL-level)
-    (if filter
+    (if logger-filter
       (.setFilter ^ConsoleHandler console-handler ^Filter logger-filter)
       (.setFilter ^ConsoleHandler console-handler nil))
     (.addHandler ^LogManager$RootLogger google-json-payload/root-logger console-handler)))
