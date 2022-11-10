@@ -25,6 +25,11 @@ jobs:
       - name: Tests
         run: clojure -X:run-tests
 
+      - name: github actions test
+        run: echo clojure -T:build uber '{:version "${{ env.VERSION }}"}'
+        env:
+          VERSION: "v1.2.3"
+
       - name: Slack notifications
         uses: 8398a7/action-slack@v3
         with:
